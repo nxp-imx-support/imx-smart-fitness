@@ -1,0 +1,5 @@
+tensorflow==2.11
+tflite-runtime==2.14.0
+opencv-python==4.8.1.78
+Pillow==10.1.0
+wheel==0.41.2

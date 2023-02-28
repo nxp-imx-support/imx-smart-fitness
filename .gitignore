@@ -1,0 +1,11 @@
+build/
+Makefile
+.cache/
+*.bk
+*.json
+*.tflite
+*.zip
+*.npy
+anchors.txt
+coco_calib_data*
+deploy/
