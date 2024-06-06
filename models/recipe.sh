@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Copyright 2023 NXP
+# Copyright 2023-2024 NXP
+# SPDX-License-Identifier: Apache-2.0
 
 # Exit immediately if a command exits with a non-zero status
 set -e

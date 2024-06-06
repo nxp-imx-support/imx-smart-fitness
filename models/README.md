@@ -14,7 +14,11 @@ output, run:
 bash recipe.sh
 ```
 
-This script requires `bash` shell and the following installed packages: `cmake`, `pip` and `miniconda` or `anaconda` for python version management.
+>**NOTE:** When running this script, please make sure you are not using the i.MX Toolchain for
+cross-compilatio, otherwise the process will fail. This script compiles for x86 Host-PC.
+
+This script requires `bash` shell and the following installed packages: `cmake`, `pip` and `miniconda` or `anaconda` for python version management. Please make sure you have these dependencies
+installed in you system.
 
 It was tested on the following OS:
 
@@ -24,7 +28,9 @@ It was tested on the following OS:
 After `recipe.sh` finishes, the TensorFlow Lite models are located at
 `./deploy/pose_detection_quant.tflite` and `./deploy/pose_landmark_lite_quant.tflite`.
 
-## BlazePose Detector
+## Models information
+
+### BlazePose Detector
 
 Information          | Value
 ---                  | ---
@@ -36,7 +42,7 @@ File size (INT8)     | 3.5 MB
 Source framework     | MediaPipe (TensorFlow Lite)
 Target platform      | MPUs
 
-## BlazePose GHUM 3D Lite
+### BlazePose GHUM 3D Lite
 
 Information          | Value
 ---                  | ---
@@ -48,34 +54,34 @@ File size (INT8)     | 1.8 MB
 Source framework     | MediaPipe (TensorFlow Lite)
 Target platform      | MPUs
 
-## Performance
+## Benchmarks
 
-Below are two tables with the performance evaluation on i.MX 8M Plus and i.MX
-93 targets for each model:
+The quantized INT8 models have been tested on i.MX 8M Plus and i.MX 93 using `./benchmark_model` tool
+(see [i.MX Machine Learning User's Guide](https://www.nxp.com/docs/en/user-guide/IMX-MACHINE-LEARNING-UG.pdf)).
 
 ### BlazePose performance
 
-Model | Average latency | Platform | Accelerator     | Command
----   | ---             | ---      | ---             | ---
-Int8  | 181.53 ms       | i.MX 8MP | CPU (1 thread)  | ./benchmark_model --graph=pose_detection_quant.tflite
-Int8  |  65.87 ms       | i.MX 8MP | CPU (4 threads) | ./benchmark_model --graph=pose_detection_quant.tflite --num_threads=4
-Int8  |   8.08 ms       | i.MX 8MP | NPU             | ./benchmark_model --graph=pose_detection_quant.tflite --external_delegate_path=/usr/lib/libvx_delegate.so
-Int8  | 102.61 ms       | i.MX 93  | CPU (1 thread)  | ./benchmark_model --graph=pose_detection_quant.tflite
-Int8  |  69.13 ms       | i.MX 93  | CPU (2 threads) | ./benchmark_model --graph=pose_detection_quant.tflite --num_threads=2
-Int8  |   7.23 ms       | i.MX 93  | NPU             | ./benchmark_model --graph=pose_detection_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
+Platform    | Accelerator     | Avg. latency | Command
+---         | ---             | ---          | ---
+i.MX 8M Plus | CPU (1 thread)  | 169.48 ms    | ./benchmark_model --graph=pose_detection_quant.tflite
+i.MX 8M Plus | CPU (4 threads) |  65.60 ms    | ./benchmark_model --graph=pose_detection_quant.tflite --num_threads=4
+i.MX 8M Plus | NPU             |   8.04 ms    | ./benchmark_model --graph=pose_detection_quant.tflite --external_delegate_path=/usr/lib/libvx_delegate.so
+i.MX 93      | CPU (1 thread)  | 104.16 ms    | ./benchmark_model --graph=pose_detection_quant.tflite
+i.MX 93      | CPU (2 threads) |  71.06 ms    | ./benchmark_model --graph=pose_detection_quant.tflite --num_threads=2
+i.MX 93      | NPU             |   7.33 ms    | ./benchmark_model --graph=pose_detection_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
 
 ### BlazePose GHUM 3D Lite performance
 
-Model | Average latency | Platform | Accelerator     | Command
----   | ---             | ---      | ---             | ---
-Int8  | 166.60 ms       | i.MX 8MP | CPU (1 thread)  | ./benchmark_model --graph=pose_landmark_lite_quant.tflite
-Int8  |  78.46 ms       | i.MX 8MP | CPU (4 threads) | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --num_threads=4
-Int8  |  16.26 ms       | i.MX 8MP | NPU             | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --external_delegate_path=/usr/lib/libvx_delegate.so
-Int8  | 115.75 ms       | i.MX 93  | CPU (1 thread)  | ./benchmark_model --graph=pose_landmark_lite_quant.tflite
-Int8  |  84.10 ms       | i.MX 93  | CPU (2 threads) | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --num_threads=2
-Int8  |  10.00 ms       | i.MX 93  | NPU             | ./benchmark_model --graph=pose_landmark_lite_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
+Platform    | Accelerator     | Avg. latency | Command
+---         | ---             | ---          | ---
+i.MX 8M Plus | CPU (1 thread)  | 160.75 ms    | ./benchmark_model --graph=pose_landmark_lite_quant.tflite
+i.MX 8M Plus | CPU (4 threads) |  77.81 ms    | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --num_threads=4
+i.MX 8M Plus | NPU             |  16.13 ms    | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --external_delegate_path=/usr/lib/libvx_delegate.so
+i.MX 93      | CPU (1 thread)  | 116.50 ms    | ./benchmark_model --graph=pose_landmark_lite_quant.tflite
+i.MX 93      | CPU (2 threads) |  84.83 ms    | ./benchmark_model --graph=pose_landmark_lite_quant.tflite --num_threads=2
+i.MX 93      | NPU             |  10.05 ms     | ./benchmark_model --graph=pose_landmark_lite_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
 
-**Note:** Evaluated on BSP LF6.1.55_2.2.0.
+>**NOTE:** Evaluated on BSP LF-6.6.23_2.0.0.
 
 ## Origin
 
