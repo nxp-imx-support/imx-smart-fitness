@@ -9,3 +9,4 @@ Makefile
 anchors.txt
 coco_calib_data*
 deploy/
+!SBOM*

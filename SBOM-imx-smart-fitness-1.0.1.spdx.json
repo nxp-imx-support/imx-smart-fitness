@@ -1,0 +1,53 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-03-11T02:28:56Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.26"
+  },
+  "name": "imx-smart-fitness-1.0.1",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/af2e13d5-b063-4895-8f96-84fd51b14795",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-af2e13d5-b063-4895-8f96-84fd51b14795",
+      "name": "imx-smart-fitness",
+      "versionInfo": "1.0.1",
+      "licenseConcluded": "(Apache-2.0)",
+      "licenseDeclared": "(Apache-2.0)",
+      "downloadLocation": "https://github.com/nxp-imx-support/imx-smart-fitness",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-af2e13d5-b063-4895-8f96-84fd51b14795---3f96694c-c4bb-4344-a0a6-98923223c58e",
+      "name": "Apache License 2.0",
+      "versionInfo": "2.0",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "homepage": "http://www.apache.org",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: Apache License 2.0",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-af2e13d5-b063-4895-8f96-84fd51b14795"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-af2e13d5-b063-4895-8f96-84fd51b14795",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-af2e13d5-b063-4895-8f96-84fd51b14795---3f96694c-c4bb-4344-a0a6-98923223c58e"
+    }
+  ]
+}
